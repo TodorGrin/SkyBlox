@@ -1,8 +1,8 @@
 package com.todorhryn.skyblox;
 
 public class SplittingTile extends Tile {
-    SplittingTile() {
-
+    SplittingTile(Playfield playfield) {
+        super(playfield);
     }
 
     @Override

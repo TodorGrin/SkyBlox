@@ -1,8 +1,8 @@
 package com.todorhryn.skyblox;
 
 public class Player {
-    private int mainBlockX = 0, mainBlockY = 0;
-    private int secondBlockX = 1, secondBlockY = 0;
+    private int mainBlockX = 5, mainBlockY = 5;
+    private int secondBlockX = 6, secondBlockY = 5;
     private Playfield playfield;
 
     public Player(Playfield playfield) {
@@ -10,6 +10,9 @@ public class Player {
     }
 
     private void moveBlocks(int mainBlockXOffset, int mainBlockYOffset, int secondBlockXOffset, int secondBlockYOffset) {
+        if (playfield.getLevelState() != LevelState.ACTIVE)
+            return;
+
         if (mainBlockX + mainBlockXOffset < 0 || mainBlockX + mainBlockXOffset >= playfield.getWidth() || mainBlockY + mainBlockYOffset < 0 || mainBlockY + mainBlockYOffset >= playfield.getHeight() ||
                 secondBlockX + secondBlockXOffset < 0 || secondBlockX + secondBlockXOffset >= playfield.getWidth() || secondBlockY + secondBlockYOffset < 0 || secondBlockY + secondBlockYOffset >= playfield.getHeight())
             return;

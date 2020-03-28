@@ -1,12 +1,13 @@
 package com.todorhryn.skyblox;
 
 public class FragileTile extends Tile {
-    FragileTile() {
-
+    FragileTile(Playfield playfield) {
+        super(playfield);
     }
 
     @Override
     public void steppedOn(int weight) {
-        super.steppedOn(weight);
+        if (weight >= 2)
+            playfield.setLevelState(LevelState.FAILED);
     }
 }

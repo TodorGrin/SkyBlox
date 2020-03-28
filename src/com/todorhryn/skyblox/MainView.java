@@ -7,20 +7,23 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
     private Playfield field;
     private GraphicsContext ctx;
+    private Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        field = new Playfield(this,10, 10);
+        field = new Playfield(this,14, 14);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("SkyBlox");
-        primaryStage.setScene(new Scene(root, 640, 500));
+        scene = new Scene(root, 640, 500);
+        primaryStage.setScene(scene);
 
         Controller controller = fxmlLoader.getController();
         controller.setPlayfield(field);
@@ -38,6 +41,10 @@ public class MainView extends Application {
     private Color getTileColor(Class<? extends Tile> tileClass) {
         if (tileClass == FragileTile.class)
             return Color.web("FF7C15");
+        else if (tileClass == EmptyTile.class)
+            return Color.web("FFFFFF");
+        else if (tileClass == ExitTile.class)
+            return Color.web("000000");
         else
             return Color.web("717171");
     }
@@ -68,6 +75,15 @@ public class MainView extends Application {
         else {
             ctx.fillRect(field.getPlayer().getMainBlockX() * 32 + 2, field.getPlayer().getMainBlockY() * 32 + 2, 26, 26);
             ctx.fillRect(field.getPlayer().getSecondBlockX() * 32 + 2, field.getPlayer().getSecondBlockY() * 32 + 2, 26, 26);
+        }
+
+        if (field.getLevelState() == LevelState.FAILED) {
+            Text message = (Text) scene.lookup("#message");
+            message.setText("Level failed");
+        }
+        else if (field.getLevelState() == LevelState.PASSED) {
+            Text message = (Text) scene.lookup("#message");
+            message.setText("Level completed!");
         }
     }
 }

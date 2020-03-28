@@ -1,8 +1,8 @@
 package com.todorhryn.skyblox;
 
 public class LightSwitch extends Tile {
-    LightSwitch() {
-
+    LightSwitch(Playfield playfield) {
+        super(playfield);
     }
 
     @Override
