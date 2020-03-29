@@ -1,5 +1,6 @@
-package com.todorhryn.skyblox.mainmenu;
+package com.todorhryn.skyblox.controllers;
 
+import com.todorhryn.skyblox.views.MainView;
 import javafx.fxml.FXML;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class FragileTile extends Tile {
-    FragileTile(Playfield playfield) {
+    public FragileTile(Playfield playfield) {
         super(playfield);
     }
 

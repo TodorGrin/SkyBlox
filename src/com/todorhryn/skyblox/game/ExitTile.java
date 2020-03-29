@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class ExitTile extends Tile {
-    ExitTile(Playfield playfield) {
+    public ExitTile(Playfield playfield) {
         super(playfield);
     }
 

@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class BridgeTile extends Tile {
-    BridgeTile(Playfield playfield) {
+    public BridgeTile(Playfield playfield) {
         super(playfield);
     }
 

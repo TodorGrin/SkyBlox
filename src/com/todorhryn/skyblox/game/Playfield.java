@@ -1,13 +1,15 @@
 package com.todorhryn.skyblox.game;
 
+import com.todorhryn.skyblox.views.PlayfieldView;
+
 public class Playfield {
     private Tile[][] field;
     private int width, height;
     private Player player;
-    private GameView view;
+    private PlayfieldView view;
     private LevelState levelState = LevelState.ACTIVE;
 
-    public Playfield(GameView view, int width, int height) {
+    public Playfield(PlayfieldView view, int width, int height) {
         field = new Tile[width][height];
         player = new Player(this);
         this.width = width;
@@ -48,6 +50,9 @@ public class Playfield {
 
     public Tile getTile(int x, int y) {
         return field[x][y];
+    }
+    public void setTile(int x, int y, Tile tile) {
+        field[x][y] = tile;
     }
     public int getWidth() {
         return width;

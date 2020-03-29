@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class HeavySwitch extends Tile {
-    HeavySwitch(Playfield playfield) {
+    public HeavySwitch(Playfield playfield) {
         super(playfield);
     }
 

@@ -3,7 +3,7 @@ package com.todorhryn.skyblox.game;
 public class Tile {
     Playfield playfield;
 
-    Tile(Playfield playfield) {
+    public Tile(Playfield playfield) {
         this.playfield = playfield;
     }
 

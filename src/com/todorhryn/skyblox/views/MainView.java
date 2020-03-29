@@ -1,7 +1,6 @@
-package com.todorhryn.skyblox.mainmenu;
+package com.todorhryn.skyblox.views;
 
-import com.todorhryn.skyblox.game.*;
-import com.todorhryn.skyblox.leveleditor.LevelEditorView;
+import com.todorhryn.skyblox.controllers.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,12 +13,9 @@ import java.io.IOException;
 public class MainView extends Application {
     private GraphicsContext ctx;
     private Scene scene;
-    private Stage stage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        stage = primaryStage;
-
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("SkyBlox");

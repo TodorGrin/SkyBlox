@@ -1,22 +1,23 @@
-package com.todorhryn.skyblox.game;
+package com.todorhryn.skyblox.views;
 
+import com.todorhryn.skyblox.controllers.PlayfieldController;
+import com.todorhryn.skyblox.game.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class GameView {
-    private Playfield playfield;
-    private Scene scene;
-    private GraphicsContext ctx;
+public class PlayfieldView {
+    protected GraphicsContext ctx;
+    protected Playfield playfield;
+    protected Scene scene;
 
-    public GameView(Scene scene) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
+    public PlayfieldView(String scenePath, Scene scene) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenePath));
         Parent root = fxmlLoader.load();
         scene.setRoot(root);
 
@@ -24,13 +25,13 @@ public class GameView {
         this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
         this.playfield = new Playfield(this,14, 14);
 
-        GameController controller = fxmlLoader.getController();
+        PlayfieldController controller = fxmlLoader.getController();
         controller.setPlayfield(playfield);
 
         drawField();
     }
 
-    private Color getTileColor(Class<? extends Tile> tileClass) {
+    protected Color getTileColor(Class<? extends Tile> tileClass) {
         if (tileClass == FragileTile.class)
             return Color.web("FF7C15");
         else if (tileClass == EmptyTile.class)
@@ -67,15 +68,6 @@ public class GameView {
         else {
             ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 2, playfield.getPlayer().getMainBlockY() * 32 + 2, 26, 26);
             ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 2, playfield.getPlayer().getSecondBlockY() * 32 + 2, 26, 26);
-        }
-
-        if (playfield.getLevelState() == LevelState.FAILED) {
-            Text message = (Text) scene.lookup("#message");
-            message.setText("Level failed");
-        }
-        else if (playfield.getLevelState() == LevelState.PASSED) {
-            Text message = (Text) scene.lookup("#message");
-            message.setText("Level completed!");
         }
     }
 

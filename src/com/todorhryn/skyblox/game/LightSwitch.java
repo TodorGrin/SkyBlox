@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class LightSwitch extends Tile {
-    LightSwitch(Playfield playfield) {
+    public LightSwitch(Playfield playfield) {
         super(playfield);
     }
 

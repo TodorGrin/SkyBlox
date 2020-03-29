@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.game;
 
 public class EmptyTile extends Tile {
-    EmptyTile(Playfield playfield) {
+    public EmptyTile(Playfield playfield) {
         super(playfield);
     }
 

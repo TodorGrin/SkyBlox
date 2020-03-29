@@ -1,11 +1,9 @@
-package com.todorhryn.skyblox.game;
+package com.todorhryn.skyblox.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 
-public class GameController {
-    Playfield playfield;
-
+public class GameController extends PlayfieldController {
     @FXML
     public void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -25,9 +23,5 @@ public class GameController {
                 playfield.getPlayer().switchBlocks();
                 break;
         }
-    }
-
-    public void setPlayfield(Playfield playfield) {
-        this.playfield = playfield;
     }
 }
