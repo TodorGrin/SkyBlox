@@ -1,22 +1,18 @@
-package com.todorhryn.skyblox;
-
-enum LevelState {
-    ACTIVE, FAILED, PASSED
-}
+package com.todorhryn.skyblox.game;
 
 public class Playfield {
     private Tile[][] field;
     private int width, height;
     private Player player;
-    private MainView mainView;
+    private GameView view;
     private LevelState levelState = LevelState.ACTIVE;
 
-    Playfield(MainView mainView, int width, int height) {
+    public Playfield(GameView view, int width, int height) {
         field = new Tile[width][height];
         player = new Player(this);
         this.width = width;
         this.height = height;
-        this.mainView = mainView;
+        this.view = view;
 
         for (int x = 0; x < width; ++x) {
             field[x][0] = new EmptyTile(this);
@@ -43,7 +39,7 @@ public class Playfield {
     }
 
     public void render() {
-        mainView.drawField();
+        view.drawField();
     }
 
     public void setLevelState(LevelState levelState) {

@@ -1,7 +1,7 @@
-package com.todorhryn.skyblox;
+package com.todorhryn.skyblox.game;
 
-public class SplittingTile extends Tile {
-    SplittingTile(Playfield playfield) {
+public class BridgeTile extends Tile {
+    BridgeTile(Playfield playfield) {
         super(playfield);
     }
 

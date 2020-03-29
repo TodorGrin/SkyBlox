@@ -1,4 +1,4 @@
-package com.todorhryn.skyblox;
+package com.todorhryn.skyblox.game;
 
 public class Tile {
     Playfield playfield;

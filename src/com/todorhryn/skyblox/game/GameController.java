@@ -1,9 +1,9 @@
-package com.todorhryn.skyblox;
+package com.todorhryn.skyblox.game;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 
-public class Controller {
+public class GameController {
     Playfield playfield;
 
     @FXML
