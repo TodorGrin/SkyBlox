@@ -1,33 +1,61 @@
 package com.todorhryn.skyblox.controllers;
 
-import com.todorhryn.skyblox.game.FragileTile;
-import com.todorhryn.skyblox.game.Tile;
+import com.todorhryn.skyblox.game.LevelEditor;
+import com.todorhryn.skyblox.game.LevelLoader;
+import com.todorhryn.skyblox.game.Playfield;
+import com.todorhryn.skyblox.game.tiles.EmptyTile;
+import com.todorhryn.skyblox.game.tiles.ExitTile;
+import com.todorhryn.skyblox.game.tiles.FragileTile;
+import com.todorhryn.skyblox.game.tiles.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
-public class LevelEditorController extends PlayfieldController {
-    int x = 3, y = 3;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+public class LevelEditorController {
+    private LevelEditor levelEditor;
+
+    public LevelEditorController(LevelEditor levelEditor) {
+        this.levelEditor = levelEditor;
+    }
 
     @FXML
     public void onButtonTileClicked() {
-        playfield.setTile(x, y, new Tile(playfield));
-        playfield.render();
+        levelEditor.setSelectedTile(Tile.class);
     }
 
     @FXML
     public void onButtonFragileTileClicked() {
-        playfield.setTile(x, y, new FragileTile(playfield));
-        playfield.render();
+        levelEditor.setSelectedTile(FragileTile.class);
     }
 
     @FXML
-    public void onMouseClicked(MouseEvent mouseEvent) {
-        int newX = (int) (mouseEvent.getX() / 32);
-        int newY = (int) (mouseEvent.getY() / 32);
+    public void onButtonEmptyTileClicked() {
+        levelEditor.setSelectedTile(EmptyTile.class);
+    }
 
-        if (newX > 1 && newY > 1) {
-            x = newX;
-            y = newY;
-        }
+    @FXML
+    public void onButtonExitTileClicked() {
+        levelEditor.setSelectedTile(ExitTile.class);
+    }
+
+    @FXML
+    public void onButtonSaveClicked() {
+        LevelLoader.getInstance().save(levelEditor);
+    }
+
+    @FXML
+    public void onMouseMoved(MouseEvent mouseEvent) {
+        levelEditor.setSelectedTileX((int) mouseEvent.getX() / 32);
+        levelEditor.setSelectedTileY((int) mouseEvent.getY() / 32);
+    }
+
+    @FXML
+    public void onMouseClicked(MouseEvent mouseEvent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        int x = (int) (mouseEvent.getX() / 32);
+        int y = (int) (mouseEvent.getY() / 32);
+
+        levelEditor.setTile(x, y, levelEditor.getSelectedTile().getDeclaredConstructor(Playfield.class).newInstance(levelEditor));
     }
 }

@@ -8,12 +8,12 @@ import java.io.IOException;
 
 public class GameView extends PlayfieldView {
     public GameView(Scene scene) throws IOException {
-        super("GameScene.fxml", scene);
+        super("/GameScene.fxml", scene);
     }
 
     @Override
-    public void drawField() {
-        super.drawField();
+    public void render() {
+        super.render();
 
         if (playfield.getLevelState() == LevelState.FAILED) {
             Text message = (Text) scene.lookup("#message");

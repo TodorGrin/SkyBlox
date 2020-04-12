@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 
 public class MainMenuController {
-    MainView mainView;
+    private MainView mainView;
 
     @FXML
     public void onPlayClicked() throws Exception {

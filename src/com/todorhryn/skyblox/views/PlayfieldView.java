@@ -1,7 +1,12 @@
 package com.todorhryn.skyblox.views;
 
 import com.todorhryn.skyblox.controllers.PlayfieldController;
-import com.todorhryn.skyblox.game.*;
+import com.todorhryn.skyblox.game.LevelLoader;
+import com.todorhryn.skyblox.game.Playfield;
+import com.todorhryn.skyblox.game.tiles.EmptyTile;
+import com.todorhryn.skyblox.game.tiles.ExitTile;
+import com.todorhryn.skyblox.game.tiles.FragileTile;
+import com.todorhryn.skyblox.game.tiles.Tile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +21,8 @@ public class PlayfieldView {
     protected Playfield playfield;
     protected Scene scene;
 
+    protected PlayfieldView() {}
+
     public PlayfieldView(String scenePath, Scene scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenePath));
         Parent root = fxmlLoader.load();
@@ -23,29 +30,33 @@ public class PlayfieldView {
 
         this.scene = scene;
         this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
-        this.playfield = new Playfield(this,14, 14);
+        this.playfield = LevelLoader.getInstance().load(this);
 
         PlayfieldController controller = fxmlLoader.getController();
         controller.setPlayfield(playfield);
 
-        drawField();
+        render();
     }
 
     protected Color getTileColor(Class<? extends Tile> tileClass) {
         if (tileClass == FragileTile.class)
             return Color.web("FF7C15");
         else if (tileClass == EmptyTile.class)
-            return Color.web("FFFFFF00");
+            return Color.web("FFFFFF");
         else if (tileClass == ExitTile.class)
             return Color.web("000000");
         else
             return Color.web("717171");
     }
 
-    public void drawField() {
+    public void render() {
+        if (ctx == null)
+            return;
+
         ctx.getCanvas().setWidth(playfield.getWidth() * 32);
         ctx.getCanvas().setHeight(playfield.getHeight() * 32);
-        ctx.clearRect(0, 0, ctx.getCanvas().getWidth(), ctx.getCanvas().getHeight());
+        ctx.setFill(Color.web("FFFFFF"));
+        ctx.fillRect(0, 0, ctx.getCanvas().getWidth(), ctx.getCanvas().getHeight());
 
         for (int x = 0; x < playfield.getWidth(); ++x) {
             for (int y = 0; y < playfield.getHeight(); ++y) {

@@ -1,5 +1,7 @@
 package com.todorhryn.skyblox.game;
 
-public enum LevelState {
+import java.io.Serializable;
+
+public enum LevelState implements Serializable {
     ACTIVE, FAILED, PASSED
 }

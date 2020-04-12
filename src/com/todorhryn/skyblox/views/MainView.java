@@ -16,7 +16,7 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainMenu.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("SkyBlox");
         scene = new Scene(root, 640, 500);

@@ -1,12 +1,18 @@
 package com.todorhryn.skyblox.game;
 
+import com.todorhryn.skyblox.game.tiles.EmptyTile;
+import com.todorhryn.skyblox.game.tiles.ExitTile;
+import com.todorhryn.skyblox.game.tiles.FragileTile;
+import com.todorhryn.skyblox.game.tiles.Tile;
 import com.todorhryn.skyblox.views.PlayfieldView;
 
-public class Playfield {
+import java.io.Serializable;
+
+public class Playfield implements Serializable {
     private Tile[][] field;
     private int width, height;
     private Player player;
-    private PlayfieldView view;
+    private transient PlayfieldView view;
     private LevelState levelState = LevelState.ACTIVE;
 
     public Playfield(PlayfieldView view, int width, int height) {
@@ -41,18 +47,22 @@ public class Playfield {
     }
 
     public void render() {
-        view.drawField();
+        view.render();
     }
 
     public void setLevelState(LevelState levelState) {
         this.levelState = levelState;
     }
+    public void setTile(int x, int y, Tile tile) {
+        field[x][y] = tile;
+        render();
+    }
+    public void setView(PlayfieldView view) {
+        this.view = view;
+    }
 
     public Tile getTile(int x, int y) {
         return field[x][y];
-    }
-    public void setTile(int x, int y, Tile tile) {
-        field[x][y] = tile;
     }
     public int getWidth() {
         return width;

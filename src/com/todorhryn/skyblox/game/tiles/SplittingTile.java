@@ -1,4 +1,6 @@
-package com.todorhryn.skyblox.game;
+package com.todorhryn.skyblox.game.tiles;
+
+import com.todorhryn.skyblox.game.Playfield;
 
 public class SplittingTile extends Tile {
     public SplittingTile(Playfield playfield) {

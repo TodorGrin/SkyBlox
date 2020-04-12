@@ -1,7 +1,9 @@
-package com.todorhryn.skyblox.game;
+package com.todorhryn.skyblox.game.tiles;
 
-public class LightSwitch extends Tile {
-    public LightSwitch(Playfield playfield) {
+import com.todorhryn.skyblox.game.Playfield;
+
+public class HeavySwitch extends Tile {
+    public HeavySwitch(Playfield playfield) {
         super(playfield);
     }
 

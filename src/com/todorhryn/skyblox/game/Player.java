@@ -1,6 +1,8 @@
 package com.todorhryn.skyblox.game;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int mainBlockX = 5, mainBlockY = 5;
     private int secondBlockX = 6, secondBlockY = 5;
     private Playfield playfield;
