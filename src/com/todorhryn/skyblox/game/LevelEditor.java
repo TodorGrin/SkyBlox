@@ -10,10 +10,9 @@ public class LevelEditor extends Playfield {
     public LevelEditor(PlayfieldView view, int width, int height) {
         super(view, width, height);
     }
+
     public LevelEditor(PlayfieldView view, Playfield playfield) {
         super(view, playfield.getWidth(), playfield.getHeight());
-
-        System.out.println(playfield);
 
         try {
             for (int x = 0; x < playfield.getWidth(); ++x) {

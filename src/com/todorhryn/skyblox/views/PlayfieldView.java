@@ -1,6 +1,6 @@
 package com.todorhryn.skyblox.views;
 
-import com.todorhryn.skyblox.controllers.PlayfieldController;
+import com.todorhryn.skyblox.controllers.GameController;
 import com.todorhryn.skyblox.game.LevelLoader;
 import com.todorhryn.skyblox.game.Playfield;
 import com.todorhryn.skyblox.game.tiles.EmptyTile;
@@ -17,9 +17,9 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 public class PlayfieldView {
-    protected GraphicsContext ctx;
-    protected Playfield playfield;
-    protected Scene scene;
+    private GraphicsContext ctx;
+    private Playfield playfield;
+    private Scene scene;
 
     protected PlayfieldView() {}
 
@@ -32,7 +32,7 @@ public class PlayfieldView {
         this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
         this.playfield = LevelLoader.getInstance().load(this);
 
-        PlayfieldController controller = fxmlLoader.getController();
+        GameController controller = fxmlLoader.getController();
         controller.setPlayfield(playfield);
 
         render();
@@ -82,7 +82,23 @@ public class PlayfieldView {
         }
     }
 
+    public Playfield getPlayfield() {
+        return playfield;
+    }
+    public Scene getScene() {
+        return scene;
+    }
+    public GraphicsContext getCtx() {
+        return ctx;
+    }
+
     public void setPlayfield(Playfield playfield) {
         this.playfield = playfield;
+    }
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+    public void setCtx(GraphicsContext ctx) {
+        this.ctx = ctx;
     }
 }

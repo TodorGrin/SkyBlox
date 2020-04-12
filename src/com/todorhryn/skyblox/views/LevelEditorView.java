@@ -21,23 +21,23 @@ public class LevelEditorView extends PlayfieldView {
         Parent root = fxmlLoader.load();
         scene.setRoot(root);
 
-        this.scene = scene;
-        this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
-        this.playfield = levelEditor;
+        setScene(scene);
+        setCtx(((Canvas) scene.lookup("#canvas")).getGraphicsContext2D());
+        setPlayfield(levelEditor);
 
         render();
     }
 
     @Override
     public void render() {
-        if (ctx == null)
+        if (getCtx() == null)
             return;
 
         super.render();
 
-        LevelEditor levelEditor = (LevelEditor) playfield;
+        LevelEditor levelEditor = (LevelEditor) getPlayfield();
 
-        ctx.setFill(getTileColor(levelEditor.getSelectedTile()));
-        ctx.fillRect(levelEditor.getSelectedTileX() * 32 - 1, levelEditor.getSelectedTileY() * 32 - 1, 32, 32);
+        getCtx().setFill(getTileColor(levelEditor.getSelectedTile()));
+        getCtx().fillRect(levelEditor.getSelectedTileX() * 32 - 1, levelEditor.getSelectedTileY() * 32 - 1, 32, 32);
     }
 }

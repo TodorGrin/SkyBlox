@@ -11,6 +11,6 @@ public class FragileTile extends Tile {
     @Override
     public void steppedOn(int weight) {
         if (weight >= 2)
-            playfield.setLevelState(LevelState.FAILED);
+            getPlayfield().setLevelState(LevelState.FAILED);
     }
 }

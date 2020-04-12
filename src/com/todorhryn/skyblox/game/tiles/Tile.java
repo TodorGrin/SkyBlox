@@ -5,7 +5,7 @@ import com.todorhryn.skyblox.game.Playfield;
 import java.io.Serializable;
 
 public class Tile implements Serializable, Cloneable {
-    protected Playfield playfield;
+    private Playfield playfield;
 
     public Tile(Playfield playfield) {
         this.playfield = playfield;
@@ -17,6 +17,10 @@ public class Tile implements Serializable, Cloneable {
 
     public void steppedOff() {
 
+    }
+
+    public Playfield getPlayfield() {
+        return playfield;
     }
 
     public void setPlayfield(Playfield playfield) {

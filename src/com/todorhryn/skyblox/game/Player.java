@@ -3,8 +3,10 @@ package com.todorhryn.skyblox.game;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private int mainBlockX = 5, mainBlockY = 5;
-    private int secondBlockX = 6, secondBlockY = 5;
+    private int mainBlockX = 5,
+                mainBlockY = 5;
+    private int secondBlockX = 6,
+                secondBlockY = 5;
     private Playfield playfield;
 
     public Player(Playfield playfield) {

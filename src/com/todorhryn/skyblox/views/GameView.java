@@ -15,12 +15,12 @@ public class GameView extends PlayfieldView {
     public void render() {
         super.render();
 
-        if (playfield.getLevelState() == LevelState.FAILED) {
-            Text message = (Text) scene.lookup("#message");
+        if (getPlayfield().getLevelState() == LevelState.FAILED) {
+            Text message = (Text) getScene().lookup("#message");
             message.setText("Level failed");
         }
-        else if (playfield.getLevelState() == LevelState.PASSED) {
-            Text message = (Text) scene.lookup("#message");
+        else if (getPlayfield().getLevelState() == LevelState.PASSED) {
+            Text message = (Text) getScene().lookup("#message");
             message.setText("Level completed!");
         }
     }

@@ -10,6 +10,6 @@ public class EmptyTile extends Tile {
 
     @Override
     public void steppedOn(int weight) {
-        playfield.setLevelState(LevelState.FAILED);
+        getPlayfield().setLevelState(LevelState.FAILED);
     }
 }

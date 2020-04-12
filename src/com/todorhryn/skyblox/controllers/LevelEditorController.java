@@ -10,7 +10,6 @@ import com.todorhryn.skyblox.game.tiles.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public class LevelEditorController {
