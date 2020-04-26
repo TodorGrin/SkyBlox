@@ -4,23 +4,100 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <VBox id="leftPane" prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="SOMETIMES">
+            <VBox id="leftPane" prefHeight="390.0" prefWidth="137.0" spacing="5.0" HBox.hgrow="SOMETIMES">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#onButtonEmptyTileClicked" prefHeight="26.0" prefWidth="100.0" text="EmptyTile" />
-                  <Button mnemonicParsing="false" onMouseClicked="#onButtonTileClicked" prefWidth="100.0" text="Tile" />
-                  <Button mnemonicParsing="false" onMouseClicked="#onButtonFragileTileClicked" prefHeight="26.0" prefWidth="100.0" text="FragileTile" />
-                  <Button mnemonicParsing="false" onMouseClicked="#onButtonExitTileClicked" prefWidth="100.0" text="ExitTile" />
-                  <Separator orientation="VERTICAL" prefHeight="200.0" VBox.vgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onMouseClicked="#onButtonSaveClicked" prefWidth="100.0" text="Save" />
+                  <TabPane fx:id="tabpane" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <tabs>
+                      <Tab onSelectionChanged="#onTabSelectionChanged" text="Add new tile">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonLightSwitchClicked" prefHeight="26.0" prefWidth="100.0" text="LightSwitch" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonEmptyTileClicked" prefHeight="26.0" prefWidth="100.0" text="EmptyTile" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonTileClicked" prefWidth="100.0" text="Tile" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonFragileTileClicked" prefHeight="26.0" prefWidth="100.0" text="FragileTile" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonExitTileClicked" prefWidth="100.0" text="ExitTile" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab onSelectionChanged="#onTabSelectionChanged" text="Select tile">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox layoutX="-7.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <CheckBox fx:id="tileVisibleCheckbox" mnemonicParsing="false" onMouseClicked="#onCheckboxTileVisibleClicked" text="Tile visible" />
+                                          <CheckBox fx:id="selectControlledTilesCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onCheckboxSelectControlledTilesClicked" text="Select controlled tiles" visible="false" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab onSelectionChanged="#onTabSelectionChanged" text="Level properties">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox layoutX="-7.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="Width:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="levelWidthSpinner">
+                                              <valueFactory>
+                                                  <SpinnerValueFactory.IntegerSpinnerValueFactory max="50" min="1" />
+                                              </valueFactory>
+                                          </Spinner>
+                                          <Label text="Height:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="levelHeightSpinner">
+                                             <valueFactory>
+                                                <SpinnerValueFactory.IntegerSpinnerValueFactory max="50" min="1" />
+                                             </valueFactory>
+                                          </Spinner>
+                                          <Button mnemonicParsing="false" onMouseClicked="#onChangeLevelPropertiesClicked" prefWidth="100.0" text="Change">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onMouseClicked="#onMovePlayerButtonClicked" prefWidth="100.0" text="Move player">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onMouseClicked="#onRotatePlayerButtonClicked" prefWidth="100.0" text="Rotate player">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                        </VBox>
+                                    </children></AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+
+                  </TabPane>
+                  <Button mnemonicParsing="false" onMouseClicked="#onButtonSaveClicked" prefWidth="200.0" text="Save" />
                </children>
             </VBox>
             <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Canvas id="canvas" focusTraversable="true" height="300.0" onMouseClicked="#onMouseClicked" onMouseMoved="#onMouseMoved" width="300.0" />
+                  <Canvas id="canvas" focusTraversable="true" height="300.0" onMouseClicked="#onMouseClicked" onMouseDragged="#onMouseClicked" onMouseMoved="#onMouseMoved" width="300.0" />
                </children>
             </StackPane>
          </children>

@@ -17,7 +17,7 @@ public class MainView extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainMenu.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("SkyBlox");
-        scene = new Scene(root, 640, 500);
+        scene = new Scene(root, 800, 500);
         primaryStage.setScene(scene);
 
         MainMenuController controller = fxmlLoader.getController();

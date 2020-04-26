@@ -3,10 +3,7 @@ package com.todorhryn.skyblox.views;
 import com.todorhryn.skyblox.controllers.GameController;
 import com.todorhryn.skyblox.game.LevelLoader;
 import com.todorhryn.skyblox.game.Playfield;
-import com.todorhryn.skyblox.game.tiles.EmptyTile;
-import com.todorhryn.skyblox.game.tiles.ExitTile;
-import com.todorhryn.skyblox.game.tiles.FragileTile;
-import com.todorhryn.skyblox.game.tiles.Tile;
+import com.todorhryn.skyblox.game.tiles.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,8 +42,19 @@ public class PlayfieldView {
             return Color.web("FFFFFF");
         else if (tileClass == ExitTile.class)
             return Color.web("000000");
+        else if (tileClass == LightSwitch.class)
+            return Color.web("6537FF");
         else
             return Color.web("717171");
+    }
+
+    public void renderTile(int x, int y) {
+        Tile tile = playfield.getTile(x, y);
+
+        if (tile.isVisible()) {
+            ctx.setFill(getTileColor(tile.getClass()));
+            ctx.fillRect(x * 32 + 1, y * 32 + 1, 30, 30);
+        }
     }
 
     public void render() {
@@ -58,27 +66,23 @@ public class PlayfieldView {
         ctx.setFill(Color.web("FFFFFF"));
         ctx.fillRect(0, 0, ctx.getCanvas().getWidth(), ctx.getCanvas().getHeight());
 
-        for (int x = 0; x < playfield.getWidth(); ++x) {
-            for (int y = 0; y < playfield.getHeight(); ++y) {
-                Tile tile = playfield.getTile(x, y);
-                ctx.setFill(getTileColor(tile.getClass()));
-                ctx.fillRect(x * 32, y * 32, 30, 30);
-            }
-        }
+        for (int x = 0; x < playfield.getWidth(); ++x)
+            for (int y = 0; y < playfield.getHeight(); ++y)
+                renderTile(x, y);
 
         ctx.setFill(Color.web("322593"));
 
         if (playfield.getPlayer().getMainBlockX() == playfield.getPlayer().getSecondBlockX() && playfield.getPlayer().getMainBlockY() + 1 == playfield.getPlayer().getSecondBlockY())
-            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 2, playfield.getPlayer().getMainBlockY() * 32 + 2, 26, 58);
+            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 3, playfield.getPlayer().getMainBlockY() * 32 + 3, 26, 58);
         else if (playfield.getPlayer().getMainBlockX() == playfield.getPlayer().getSecondBlockX() && playfield.getPlayer().getMainBlockY() - 1 == playfield.getPlayer().getSecondBlockY())
-            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 2, playfield.getPlayer().getSecondBlockY() * 32 + 2, 26, 58);
+            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 3, playfield.getPlayer().getSecondBlockY() * 32 + 3, 26, 58);
         else if (playfield.getPlayer().getMainBlockY() == playfield.getPlayer().getSecondBlockY() && playfield.getPlayer().getMainBlockX() + 1 == playfield.getPlayer().getSecondBlockX())
-            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 2, playfield.getPlayer().getMainBlockY() * 32 + 2, 58, 26);
+            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 3, playfield.getPlayer().getMainBlockY() * 32 + 3, 58, 26);
         else if (playfield.getPlayer().getMainBlockY() == playfield.getPlayer().getSecondBlockY() && playfield.getPlayer().getMainBlockX() - 1 == playfield.getPlayer().getSecondBlockX())
-            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 2, playfield.getPlayer().getSecondBlockY() * 32 + 2, 58, 26);
+            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 3, playfield.getPlayer().getSecondBlockY() * 32 + 3, 58, 26);
         else {
-            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 2, playfield.getPlayer().getMainBlockY() * 32 + 2, 26, 26);
-            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 2, playfield.getPlayer().getSecondBlockY() * 32 + 2, 26, 26);
+            ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 3, playfield.getPlayer().getMainBlockY() * 32 + 3, 26, 26);
+            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 3, playfield.getPlayer().getSecondBlockY() * 32 + 3, 26, 26);
         }
     }
 

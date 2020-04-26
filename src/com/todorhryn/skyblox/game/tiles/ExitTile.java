@@ -10,7 +10,9 @@ public class ExitTile extends Tile {
 
     @Override
     public void steppedOn(int weight) {
-        if (weight == 2)
+        super.steppedOn(weight);
+
+        if (weight == 2 && getPlayfield().getLevelState() == LevelState.ACTIVE)
             getPlayfield().setLevelState(LevelState.PASSED);
     }
 }
