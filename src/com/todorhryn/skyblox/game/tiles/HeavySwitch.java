@@ -2,7 +2,7 @@ package com.todorhryn.skyblox.game.tiles;
 
 import com.todorhryn.skyblox.game.Playfield;
 
-public class HeavySwitch extends Tile {
+public class HeavySwitch extends TileController {
     public HeavySwitch(Playfield playfield) {
         super(playfield);
     }
@@ -10,10 +10,10 @@ public class HeavySwitch extends Tile {
     @Override
     public void steppedOn(int weight) {
         super.steppedOn(weight);
-    }
 
-    @Override
-    public void steppedOff() {
-        super.steppedOff();
+        if (weight == 2) {
+            for (Tile tile : getControlledTiles())
+                tile.setVisible(!tile.isVisible());
+        }
     }
 }

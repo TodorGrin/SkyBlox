@@ -7,8 +7,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class GameView extends PlayfieldView {
-    public GameView(Scene scene) throws IOException {
-        super("/GameScene.fxml", scene);
+    public GameView(Scene scene, String levelName) throws IOException {
+        super("/scenes/GameScene.fxml", scene, levelName);
     }
 
     @Override

@@ -1,15 +1,23 @@
 package com.todorhryn.skyblox.game;
 
+import com.todorhryn.skyblox.views.Alert;
 import com.todorhryn.skyblox.views.PlayfieldView;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class LevelLoader {
     private static LevelLoader levelLoader;
-    private static String saveFile = "levels\\levelSave.skyblox";
 
     private LevelLoader() {
+    }
 
+    private String getLevelPath(String levelName) {
+        return "levels/" + levelName + ".skyblox";
     }
 
     public static LevelLoader getInstance() {
@@ -19,40 +27,36 @@ public class LevelLoader {
         return levelLoader;
     }
 
-    public Playfield load(PlayfieldView playfieldView) {
+    public Playfield load(PlayfieldView playfieldView, String levelName) {
         Playfield playfield;
 
-        try {
-            FileInputStream file = new FileInputStream(saveFile);
+        try (
+            FileInputStream file = new FileInputStream(getLevelPath(levelName));
             ObjectInputStream in = new ObjectInputStream(file);
-
+        ){
             playfield = (Playfield) in.readObject();
             playfield.setView(playfieldView);
-
-            in.close();
-            file.close();
         }
         catch (IOException | ClassNotFoundException ex) {
+            Alert.showError("Error while loading level", ex.getLocalizedMessage());
             playfield = new Playfield(playfieldView,14, 14);
         }
 
         return playfield;
     }
 
-    public void save(Playfield playfield) {
-        try {
-            File file = new File(saveFile);
-            file.getParentFile().mkdirs();
-            FileOutputStream os = new FileOutputStream(saveFile);
-            ObjectOutputStream out = new ObjectOutputStream(os);
+    public void save(Playfield playfield, String levelName) {
+        File file = new File(getLevelPath(levelName));
+        file.getParentFile().mkdirs();
 
+        try (
+                FileOutputStream os = new FileOutputStream(getLevelPath(levelName));
+                ObjectOutputStream out = new ObjectOutputStream(os);
+        ){
             out.writeObject(playfield);
-
-            out.close();
-            os.close();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            Alert.showError("Error while saving level", e.getLocalizedMessage());
         }
     }
 }

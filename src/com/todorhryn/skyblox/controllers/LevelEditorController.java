@@ -5,16 +5,19 @@ import com.todorhryn.skyblox.game.LevelEditorState;
 import com.todorhryn.skyblox.game.LevelLoader;
 import com.todorhryn.skyblox.game.Player;
 import com.todorhryn.skyblox.game.tiles.*;
+import com.todorhryn.skyblox.views.Alert;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class LevelEditorController {
     private LevelEditor levelEditor;
+    private String levelName;
+    private int lastDraggedTileX = -1,
+            lastDraggedTileY = -1;
+
     @FXML
     private TabPane tabpane;
     @FXML
@@ -22,8 +25,9 @@ public class LevelEditorController {
     @FXML
     private Spinner<Integer> levelWidthSpinner, levelHeightSpinner;
 
-    public LevelEditorController(LevelEditor levelEditor) {
+    public LevelEditorController(LevelEditor levelEditor, String levelName) {
         this.levelEditor = levelEditor;
+        this.levelName = levelName;
     }
 
     @FXML
@@ -58,8 +62,13 @@ public class LevelEditorController {
     }
 
     @FXML
+    public void onButtonHeavySwitchClicked() {
+        levelEditor.setNewTileClass(HeavySwitch.class);
+    }
+
+    @FXML
     public void onButtonSaveClicked() {
-        LevelLoader.getInstance().save(levelEditor);
+        LevelLoader.getInstance().save(levelEditor, levelName);
     }
 
     @FXML
@@ -119,18 +128,33 @@ public class LevelEditorController {
     }
 
     @FXML
-    public void onMouseClicked(MouseEvent mouseEvent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public void onMouseDragged(MouseEvent mouseEvent) {
         int x = (int) (mouseEvent.getX() / 32);
         int y = (int) (mouseEvent.getY() / 32);
 
-        levelEditor.onTileClicked(x, y);
+        if (x != lastDraggedTileX || y != lastDraggedTileY)
+            onMousePressed(mouseEvent);
+    }
 
-        if (levelEditor.getState() == LevelEditorState.SELECT_TILE) {
-            selectControlledTilesCheckbox.setVisible(levelEditor.getTile(x, y).getClass() == LightSwitch.class);
-            tileVisibleCheckbox.setSelected(levelEditor.getTile(x, y).isVisible());
+    @FXML
+    public void onMousePressed(MouseEvent mouseEvent) {
+        int x = (int) (mouseEvent.getX() / 32);
+        int y = (int) (mouseEvent.getY() / 32);
+        lastDraggedTileX = x;
+        lastDraggedTileY = y;
+
+        try {
+            levelEditor.onTileClicked(x, y);
+
+            if (levelEditor.getState() == LevelEditorState.SELECT_TILE) {
+                selectControlledTilesCheckbox.setVisible(levelEditor.getTile(x, y) instanceof TileController);
+                tileVisibleCheckbox.setSelected(levelEditor.getTile(x, y).isVisible());
+            } else if (levelEditor.getState() == LevelEditorState.MOVE_PLAYER)
+                levelEditor.setState(LevelEditorState.DO_NOTHING);
         }
-        else if (levelEditor.getState() == LevelEditorState.MOVE_PLAYER)
-            levelEditor.setState(LevelEditorState.DO_NOTHING);
+        catch (Exception e) {
+            Alert.showError("Error", e.getLocalizedMessage());
+        }
     }
 
     @FXML

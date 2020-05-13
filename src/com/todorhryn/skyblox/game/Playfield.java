@@ -29,6 +29,10 @@ public class Playfield implements Serializable {
         clearBorders();
     }
 
+    public boolean invalidCoordinates(int x, int y) {
+        return (x < 2 || y < 2 || x >= width - 2 || y >= height - 2);
+    }
+
     private void clearBorders() {
         for (int x = 0; x < width; ++x) {
             field[x][0] = new EmptyTile(this);

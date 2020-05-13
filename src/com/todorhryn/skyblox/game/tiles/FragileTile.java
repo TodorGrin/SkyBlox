@@ -12,7 +12,9 @@ public class FragileTile extends Tile {
     public void steppedOn(int weight) {
         super.steppedOn(weight);
 
-        if (weight >= 2)
+        if (weight >= 2) {
+            setVisible(false);
             getPlayfield().setLevelState(LevelState.FAILED);
+        }
     }
 }

@@ -4,8 +4,8 @@ import com.todorhryn.skyblox.controllers.LevelEditorController;
 import com.todorhryn.skyblox.game.LevelEditor;
 import com.todorhryn.skyblox.game.LevelEditorState;
 import com.todorhryn.skyblox.game.LevelLoader;
-import com.todorhryn.skyblox.game.tiles.LightSwitch;
 import com.todorhryn.skyblox.game.tiles.Tile;
+import com.todorhryn.skyblox.game.tiles.TileController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,11 +15,11 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 public class LevelEditorView extends PlayfieldView {
-    public LevelEditorView(Scene scene) throws IOException {
-        LevelEditor levelEditor = new LevelEditor(this, LevelLoader.getInstance().load(this));
+    public LevelEditorView(Scene scene, String levelName) throws IOException {
+        LevelEditor levelEditor = new LevelEditor(this, LevelLoader.getInstance().load(this, levelName));
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/LevelEditorScene.fxml"));
-        LevelEditorController controller = new LevelEditorController(levelEditor);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/LevelEditorScene.fxml"));
+        LevelEditorController controller = new LevelEditorController(levelEditor, levelName);
         fxmlLoader.setController(controller);
 
         Parent root = fxmlLoader.load();
@@ -48,7 +48,7 @@ public class LevelEditorView extends PlayfieldView {
                     getCtx().fillRect(x * 32, y * 32, 32, 32);
                 }
 
-                if (selectedTile.getClass() == LightSwitch.class && ((LightSwitch) selectedTile).getControlledTiles().contains(tile)) {
+                if (selectedTile instanceof TileController && ((TileController) selectedTile).getControlledTiles().contains(tile)) {
                     getCtx().setFill(Color.web("B2B2B290"));
                     getCtx().fillRect(x * 32, y * 32, 32, 32);
                 }

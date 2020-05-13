@@ -122,10 +122,7 @@ public class Player implements Serializable {
     }
 
     public void setPosition(int mainBlockX, int mainBlockY, int secondBlockX, int secondBlockY) {
-        if (mainBlockX < 2 || mainBlockX >= playfield.getWidth() - 2 || mainBlockY < 2 || mainBlockY >= playfield.getHeight() - 2)
-            return;
-
-        if (secondBlockX < 2 || secondBlockX >= playfield.getWidth() - 2 || secondBlockY < 2 || secondBlockY >= playfield.getHeight() - 2)
+        if (playfield.invalidCoordinates(mainBlockX, mainBlockY) || playfield.invalidCoordinates(secondBlockX, secondBlockY))
             return;
 
         this.mainBlockX = mainBlockX;

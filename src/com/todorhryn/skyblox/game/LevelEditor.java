@@ -1,20 +1,17 @@
 package com.todorhryn.skyblox.game;
 
-import com.todorhryn.skyblox.game.tiles.LightSwitch;
 import com.todorhryn.skyblox.game.tiles.Tile;
+import com.todorhryn.skyblox.game.tiles.TileController;
 import com.todorhryn.skyblox.views.PlayfieldView;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class LevelEditor extends Playfield {
-    private int newTileX = 2, newTileY = 2;
+    private int newTileX = 2;
+    private int newTileY = 2;
     private Class<? extends Tile> newTileClass = Tile.class;
     private Tile selectedTile;
     private LevelEditorState state = LevelEditorState.ADD_NEW_TILE;
-
-    public LevelEditor(PlayfieldView view, int width, int height) {
-        super(view, width, height);
-    }
 
     public LevelEditor(PlayfieldView view, Playfield playfield) {
         super(view, playfield.getWidth(), playfield.getHeight());
@@ -32,6 +29,9 @@ public class LevelEditor extends Playfield {
     }
 
     public void onTileClicked(int x, int y) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (invalidCoordinates(x, y))
+            return;
+
         if (state == LevelEditorState.ADD_NEW_TILE) {
             setTile(x, y, newTileClass.getDeclaredConstructor(Playfield.class).newInstance(this));
         }
@@ -39,16 +39,21 @@ public class LevelEditor extends Playfield {
             setSelectedTile(getTile(x, y));
         }
         else if (state == LevelEditorState.SELECT_CONTROLLED_TILES) {
-            if (selectedTile.getClass() == LightSwitch.class) {
-                LightSwitch lightSwitch = (LightSwitch) selectedTile;
-                lightSwitch.addControlledTile(getTile(x, y));
+            if (selectedTile instanceof TileController) {
+                TileController tileController = (TileController) selectedTile;
+
+                if (tileController.getControlledTiles().contains(getTile(x, y)))
+                    tileController.getControlledTiles().remove(getTile(x, y));
+                else
+                    tileController.getControlledTiles().add(getTile(x, y));
+
                 render();
             }
         }
     }
 
     public void setNewTileX(int newTileX) {
-        if (newTileX < 2 || newTileX >= getWidth() - 2)
+        if (invalidCoordinates(newTileX, newTileY))
             return;
 
         this.newTileX = newTileX;
@@ -56,7 +61,7 @@ public class LevelEditor extends Playfield {
     }
 
     public void setNewTileY(int newTileY) {
-        if (newTileY < 2 || newTileY >= getHeight() - 2)
+        if (invalidCoordinates(newTileX, newTileY))
             return;
 
         this.newTileY = newTileY;
@@ -65,7 +70,7 @@ public class LevelEditor extends Playfield {
 
     @Override
     public void setTile(int x, int y, Tile tile) {
-        if (x < 2 || x >= getWidth() - 2 || y < 2 || y >= getHeight() - 2)
+        if (invalidCoordinates(x, y))
             return;
 
         super.setTile(x, y, tile);

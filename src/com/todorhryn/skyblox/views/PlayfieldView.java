@@ -20,14 +20,14 @@ public class PlayfieldView {
 
     protected PlayfieldView() {}
 
-    public PlayfieldView(String scenePath, Scene scene) throws IOException {
+    public PlayfieldView(String scenePath, Scene scene, String levelName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenePath));
         Parent root = fxmlLoader.load();
         scene.setRoot(root);
 
         this.scene = scene;
         this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
-        this.playfield = LevelLoader.getInstance().load(this);
+        this.playfield = LevelLoader.getInstance().load(this, levelName);
 
         GameController controller = fxmlLoader.getController();
         controller.setPlayfield(playfield);
@@ -44,6 +44,8 @@ public class PlayfieldView {
             return Color.web("000000");
         else if (tileClass == LightSwitch.class)
             return Color.web("6537FF");
+        else if (tileClass == HeavySwitch.class)
+            return Color.web("000BBD");
         else
             return Color.web("717171");
     }
