@@ -1,12 +1,10 @@
 package com.todorhryn.skyblox.controllers;
 
-import com.todorhryn.skyblox.game.LevelEditor;
-import com.todorhryn.skyblox.game.LevelEditorState;
-import com.todorhryn.skyblox.game.LevelLoader;
-import com.todorhryn.skyblox.game.Player;
+import com.todorhryn.skyblox.game.*;
 import com.todorhryn.skyblox.game.tiles.*;
 import com.todorhryn.skyblox.views.Alert;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TabPane;
@@ -16,7 +14,7 @@ public class LevelEditorController {
     private LevelEditor levelEditor;
     private String levelName;
     private int lastDraggedTileX = -1,
-            lastDraggedTileY = -1;
+                lastDraggedTileY = -1;
 
     @FXML
     private TabPane tabpane;
@@ -24,6 +22,8 @@ public class LevelEditorController {
     private CheckBox selectControlledTilesCheckbox, tileVisibleCheckbox;
     @FXML
     private Spinner<Integer> levelWidthSpinner, levelHeightSpinner;
+    @FXML
+    private Button selectMainBlockPositionButton, selectSecondBlockPositionButton;
 
     public LevelEditorController(LevelEditor levelEditor, String levelName) {
         this.levelEditor = levelEditor;
@@ -67,8 +67,23 @@ public class LevelEditorController {
     }
 
     @FXML
+    public void onButtonSplittingTileClicked() {
+        levelEditor.setNewTileClass(SplittingTile.class);
+    }
+
+    @FXML
     public void onButtonSaveClicked() {
         LevelLoader.getInstance().save(levelEditor, levelName);
+    }
+
+    @FXML
+    public void onButtonSelectMainBlockPositionClicked() {
+        levelEditor.setState(LevelEditorState.SELECT_MAIN_BLOCK_POSITION);
+    }
+
+    @FXML
+    public void onButtonSelectSecondBlockPositionClicked() {
+        levelEditor.setState(LevelEditorState.SELECT_SECOND_BLOCK_POSITION);
     }
 
     @FXML
@@ -125,6 +140,14 @@ public class LevelEditorController {
 
             player.setPosition(x, y, x + dx, y + dy);
         }
+        else if (levelEditor.getState() == LevelEditorState.SELECT_MAIN_BLOCK_POSITION) {
+            SplittingTile splittingTile = (SplittingTile) levelEditor.getSelectedTile();
+            splittingTile.setMainBlockPosition(x, y);
+        }
+        else if (levelEditor.getState() == LevelEditorState.SELECT_SECOND_BLOCK_POSITION) {
+            SplittingTile splittingTile = (SplittingTile) levelEditor.getSelectedTile();
+            splittingTile.setSecondBlockPosition(x, y);
+        }
     }
 
     @FXML
@@ -148,9 +171,15 @@ public class LevelEditorController {
 
             if (levelEditor.getState() == LevelEditorState.SELECT_TILE) {
                 selectControlledTilesCheckbox.setVisible(levelEditor.getTile(x, y) instanceof TileController);
+                selectMainBlockPositionButton.setVisible(levelEditor.getTile(x, y) instanceof SplittingTile);
+                selectSecondBlockPositionButton.setVisible(levelEditor.getTile(x, y) instanceof SplittingTile);
+
                 tileVisibleCheckbox.setSelected(levelEditor.getTile(x, y).isVisible());
-            } else if (levelEditor.getState() == LevelEditorState.MOVE_PLAYER)
+            }
+            else if (levelEditor.getState() == LevelEditorState.MOVE_PLAYER)
                 levelEditor.setState(LevelEditorState.DO_NOTHING);
+            else if (levelEditor.getState() == LevelEditorState.SELECT_MAIN_BLOCK_POSITION || levelEditor.getState() == LevelEditorState.SELECT_SECOND_BLOCK_POSITION)
+                levelEditor.setState(LevelEditorState.SELECT_TILE);
         }
         catch (Exception e) {
             Alert.showError("Error", e.getLocalizedMessage());

@@ -4,6 +4,7 @@ import com.todorhryn.skyblox.controllers.LevelEditorController;
 import com.todorhryn.skyblox.game.LevelEditor;
 import com.todorhryn.skyblox.game.LevelEditorState;
 import com.todorhryn.skyblox.game.LevelLoader;
+import com.todorhryn.skyblox.game.tiles.SplittingTile;
 import com.todorhryn.skyblox.game.tiles.Tile;
 import com.todorhryn.skyblox.game.tiles.TileController;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,9 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 public class LevelEditorView extends PlayfieldView {
+    public static final Color controlledTileOverlayColor = Color.web("00A6FF50");
+    public static final Color blockAfterSplitColor = Color.web("3C26FF");
+
     public LevelEditorView(Scene scene, String levelName) throws IOException {
         LevelEditor levelEditor = new LevelEditor(this, LevelLoader.getInstance().load(this, levelName));
 
@@ -44,12 +48,11 @@ public class LevelEditorView extends PlayfieldView {
 
             if (selectedTile != null) {
                 if (selectedTile == tile) {
-                    getCtx().setFill(getTileColor(selectedTile.getClass()));
-                    getCtx().fillRect(x * 32, y * 32, 32, 32);
+                    getCtx().drawImage(getTileImage(selectedTile.getClass()), x * 32, y * 32, 32, 32);
                 }
 
                 if (selectedTile instanceof TileController && ((TileController) selectedTile).getControlledTiles().contains(tile)) {
-                    getCtx().setFill(Color.web("B2B2B290"));
+                    getCtx().setFill(controlledTileOverlayColor);
                     getCtx().fillRect(x * 32, y * 32, 32, 32);
                 }
             }
@@ -66,8 +69,16 @@ public class LevelEditorView extends PlayfieldView {
         LevelEditor levelEditor = (LevelEditor) getPlayfield();
 
         if (levelEditor.getState() == LevelEditorState.ADD_NEW_TILE) {
-            getCtx().setFill(getTileColor(levelEditor.getNewTileClass()));
-            getCtx().fillRect(levelEditor.getNewTileX() * 32, levelEditor.getNewTileY() * 32, 32, 32);
+            getCtx().drawImage(getTileImage(levelEditor.getNewTileClass()), levelEditor.getNewTileX() * 32, levelEditor.getNewTileY() * 32, 32, 32);
+        }
+
+        Tile selectedTile = levelEditor.getSelectedTile();
+
+        if (selectedTile != null && selectedTile.getClass() == SplittingTile.class) {
+            SplittingTile splittingTile = (SplittingTile) levelEditor.getSelectedTile();
+            getCtx().setFill(blockAfterSplitColor);
+            getCtx().fillRect(splittingTile.getMainBlockX() * 32 + 3, splittingTile.getMainBlockY() * 32 + 3, 26, 26);
+            getCtx().fillRect(splittingTile.getSecondBlockX() * 32 + 3, splittingTile.getSecondBlockY() * 32 + 3, 26, 26);
         }
     }
 }

@@ -10,13 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class PlayfieldView {
+    public static final Color blockColor = Color.web("322593");
+    public static final Color backgroundColor = Color.web("FFFFFF");
+
     private GraphicsContext ctx;
     private Playfield playfield;
     private Scene scene;
+    private HashMap<Class<? extends Tile>, Image> images = new HashMap<>();
 
     protected PlayfieldView() {}
 
@@ -35,27 +41,27 @@ public class PlayfieldView {
         render();
     }
 
-    protected Color getTileColor(Class<? extends Tile> tileClass) {
-        if (tileClass == FragileTile.class)
-            return Color.web("FF7C15");
-        else if (tileClass == EmptyTile.class)
-            return Color.web("FFFFFF");
-        else if (tileClass == ExitTile.class)
-            return Color.web("000000");
-        else if (tileClass == LightSwitch.class)
-            return Color.web("6537FF");
-        else if (tileClass == HeavySwitch.class)
-            return Color.web("000BBD");
-        else
-            return Color.web("717171");
+    protected Image getTileImage(Class<? extends Tile> tileClass) {
+        if (images.containsKey(tileClass))
+            return images.get(tileClass);
+        else {
+            try {
+                Image image = new Image("images/" + tileClass.getSimpleName() + ".png");
+                images.put(tileClass, image);
+                return image;
+            }
+            catch (Exception e) {
+                Alert.showError("Error while loading " + tileClass.getSimpleName() + " image", e.getLocalizedMessage());
+                return null;
+            }
+        }
     }
 
     public void renderTile(int x, int y) {
         Tile tile = playfield.getTile(x, y);
 
         if (tile.isVisible()) {
-            ctx.setFill(getTileColor(tile.getClass()));
-            ctx.fillRect(x * 32 + 1, y * 32 + 1, 30, 30);
+            ctx.drawImage(getTileImage(tile.getClass()), x * 32 + 1, y * 32 + 1, 30, 30);
         }
     }
 
@@ -65,14 +71,14 @@ public class PlayfieldView {
 
         ctx.getCanvas().setWidth(playfield.getWidth() * 32);
         ctx.getCanvas().setHeight(playfield.getHeight() * 32);
-        ctx.setFill(Color.web("FFFFFF"));
+        ctx.setFill(backgroundColor);
         ctx.fillRect(0, 0, ctx.getCanvas().getWidth(), ctx.getCanvas().getHeight());
 
         for (int x = 0; x < playfield.getWidth(); ++x)
             for (int y = 0; y < playfield.getHeight(); ++y)
                 renderTile(x, y);
 
-        ctx.setFill(Color.web("322593"));
+        ctx.setFill(blockColor);
 
         if (playfield.getPlayer().getMainBlockX() == playfield.getPlayer().getSecondBlockX() && playfield.getPlayer().getMainBlockY() + 1 == playfield.getPlayer().getSecondBlockY())
             ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 3, playfield.getPlayer().getMainBlockY() * 32 + 3, 26, 58);

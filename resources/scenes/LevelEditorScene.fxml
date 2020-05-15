@@ -33,6 +33,7 @@
                                           <Button mnemonicParsing="false" onMouseClicked="#onButtonTileClicked" prefWidth="100.0" text="Tile" />
                                           <Button mnemonicParsing="false" onMouseClicked="#onButtonLightSwitchClicked" prefHeight="26.0" prefWidth="100.0" text="LightSwitch" />
                                           <Button mnemonicParsing="false" onMouseClicked="#onButtonHeavySwitchClicked" prefHeight="26.0" prefWidth="100.0" text="HeavySwitch" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onButtonSplittingTileClicked" prefHeight="26.0" prefWidth="100.0" text="SplittingTile" />
                                           <Button mnemonicParsing="false" onMouseClicked="#onButtonFragileTileClicked" prefHeight="26.0" prefWidth="100.0" text="FragileTile" />
                                           <Button mnemonicParsing="false" onMouseClicked="#onButtonExitTileClicked" prefWidth="100.0" text="ExitTile" />
                                        </children>
@@ -45,10 +46,12 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox layoutX="-7.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <VBox layoutX="-7.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <CheckBox fx:id="tileVisibleCheckbox" mnemonicParsing="false" onMouseClicked="#onCheckboxTileVisibleClicked" text="Tile visible" />
                                           <CheckBox fx:id="selectControlledTilesCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onCheckboxSelectControlledTilesClicked" text="Select controlled tiles" visible="false" wrapText="true" />
+                                          <Button fx:id="selectMainBlockPositionButton" mnemonicParsing="false" onMouseClicked="#onButtonSelectMainBlockPositionClicked" prefHeight="44.0" prefWidth="100.0" text="Select main block position" textAlignment="CENTER" visible="false" wrapText="true" />
+                                          <Button fx:id="selectSecondBlockPositionButton" mnemonicParsing="false" onMouseClicked="#onButtonSelectSecondBlockPositionClicked" prefHeight="44.0" prefWidth="100.0" text="Select second block position" textAlignment="CENTER" visible="false" wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children></AnchorPane>
