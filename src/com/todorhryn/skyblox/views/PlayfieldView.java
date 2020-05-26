@@ -1,12 +1,8 @@
 package com.todorhryn.skyblox.views;
 
-import com.todorhryn.skyblox.controllers.GameController;
-import com.todorhryn.skyblox.game.LevelLoader;
+import com.todorhryn.skyblox.controllers.SceneController;
 import com.todorhryn.skyblox.game.Playfield;
 import com.todorhryn.skyblox.game.tiles.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -15,29 +11,22 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class PlayfieldView {
+public class PlayfieldView extends View {
     public static final Color blockColor = Color.web("322593");
     public static final Color backgroundColor = Color.web("FFFFFF");
 
     private GraphicsContext ctx;
     private Playfield playfield;
-    private Scene scene;
     private HashMap<Class<? extends Tile>, Image> images = new HashMap<>();
 
-    protected PlayfieldView() {}
+    public PlayfieldView(SceneController sceneController, String scenePath) throws IOException {
+        super(sceneController, scenePath);
+        this.ctx = ((Canvas) getRoot().lookup("#canvas")).getGraphicsContext2D();
+    }
 
-    public PlayfieldView(String scenePath, Scene scene, String levelName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(scenePath));
-        Parent root = fxmlLoader.load();
-        scene.setRoot(root);
-
-        this.scene = scene;
-        this.ctx = ((Canvas) scene.lookup("#canvas")).getGraphicsContext2D();
-        this.playfield = LevelLoader.getInstance().load(this, levelName);
-
-        GameController controller = fxmlLoader.getController();
-        controller.setPlayfield(playfield);
-
+    @Override
+    public void show() {
+        super.show();
         render();
     }
 
@@ -66,7 +55,7 @@ public class PlayfieldView {
     }
 
     public void render() {
-        if (ctx == null)
+        if (ctx == null || playfield == null)
             return;
 
         ctx.getCanvas().setWidth(playfield.getWidth() * 32);
@@ -97,20 +86,12 @@ public class PlayfieldView {
     public Playfield getPlayfield() {
         return playfield;
     }
-    public Scene getScene() {
-        return scene;
-    }
+
     public GraphicsContext getCtx() {
         return ctx;
     }
 
     public void setPlayfield(Playfield playfield) {
         this.playfield = playfield;
-    }
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
-    public void setCtx(GraphicsContext ctx) {
-        this.ctx = ctx;
     }
 }

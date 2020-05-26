@@ -1,14 +1,18 @@
 package com.todorhryn.skyblox.views;
 
+import com.todorhryn.skyblox.controllers.GameController;
+import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.game.LevelLoader;
 import com.todorhryn.skyblox.game.LevelState;
-import javafx.scene.Scene;
-import javafx.scene.text.Text;
+import com.todorhryn.skyblox.game.Playfield;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class GameView extends PlayfieldView {
-    public GameView(Scene scene, String levelName) throws IOException {
-        super("/scenes/GameScene.fxml", scene, levelName);
+    public GameView(SceneController sceneController, String levelName) throws IOException {
+        super(sceneController, "/scenes/GameScene.fxml");
+        setPlayfield(LevelLoader.getInstance().load(this, levelName));
     }
 
     @Override
@@ -16,12 +20,18 @@ public class GameView extends PlayfieldView {
         super.render();
 
         if (getPlayfield().getLevelState() == LevelState.FAILED) {
-            Text message = (Text) getScene().lookup("#message");
+            Label message = (Label) getRoot().lookup("#message");
             message.setText("Level failed");
         }
         else if (getPlayfield().getLevelState() == LevelState.PASSED) {
-            Text message = (Text) getScene().lookup("#message");
+            Label message = (Label) getRoot().lookup("#message");
             message.setText("Level completed!");
         }
+    }
+
+    @Override
+    public void setPlayfield(Playfield playfield) {
+        super.setPlayfield(playfield);
+        ((GameController) getController()).setPlayfield(playfield);
     }
 }

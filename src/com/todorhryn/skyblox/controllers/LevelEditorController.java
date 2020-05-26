@@ -10,7 +10,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 
-public class LevelEditorController {
+public class LevelEditorController extends Controller {
     private LevelEditor levelEditor;
     private String levelName;
     private int lastDraggedTileX = -1,
@@ -25,13 +25,11 @@ public class LevelEditorController {
     @FXML
     private Button selectMainBlockPositionButton, selectSecondBlockPositionButton;
 
-    public LevelEditorController(LevelEditor levelEditor, String levelName) {
-        this.levelEditor = levelEditor;
-        this.levelName = levelName;
-    }
-
     @FXML
     public void initialize() {
+        if (levelEditor == null)
+            return;
+
         levelWidthSpinner.getValueFactory().setValue(levelEditor.getWidth() - 4);
         levelHeightSpinner.getValueFactory().setValue(levelEditor.getHeight() - 4);
     }
@@ -188,6 +186,9 @@ public class LevelEditorController {
 
     @FXML
     public void onTabSelectionChanged() {
+        if (levelEditor == null)
+            return;
+
         int index = tabpane.getSelectionModel().getSelectedIndex();
 
         if (index == 0)
@@ -196,5 +197,21 @@ public class LevelEditorController {
             levelEditor.setState(LevelEditorState.SELECT_TILE);
         else if (index == 2)
             levelEditor.setState(LevelEditorState.DO_NOTHING);
+    }
+
+    @FXML
+    public void backButton_onClicked() {
+        getSceneController().showLevelsList(true);
+    }
+
+    public void setLevelEditor(LevelEditor levelEditor) {
+        this.levelEditor = levelEditor;
+
+        levelWidthSpinner.getValueFactory().setValue(levelEditor.getWidth() - 4);
+        levelHeightSpinner.getValueFactory().setValue(levelEditor.getHeight() - 4);
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 }

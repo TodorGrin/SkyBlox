@@ -56,6 +56,7 @@ public class Player implements Serializable {
             }
         }
 
+        playfield.increaseStepsCount();
         playfield.render();
     }
 

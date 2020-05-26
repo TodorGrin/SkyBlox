@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todorhryn.skyblox.controllers.HighscoresDialogController">
+   <children>
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="44.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Label text="Рекорды">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <TableView fx:id="highscoresTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <AnchorPane prefHeight="42.0" prefWidth="590.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#okButton_onClicked" text="Ok" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

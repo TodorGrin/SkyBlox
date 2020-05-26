@@ -11,7 +11,9 @@ public class Playfield implements Serializable {
     private int width, height;
     private Player player;
     private transient PlayfieldView view;
+    private int stepsCount = 0;
     private LevelState levelState = LevelState.ACTIVE;
+    private String levelName;
 
     public Playfield(PlayfieldView view, int width, int height) {
         field = new Tile[width][height];
@@ -55,6 +57,11 @@ public class Playfield implements Serializable {
 
     public void setLevelState(LevelState levelState) {
         this.levelState = levelState;
+
+        if (levelState == LevelState.PASSED) {
+            AccountManager.getInstance().getCurrentAccount().addHighscore(levelName, stepsCount);
+            AccountManager.getInstance().save();
+        }
     }
 
     public void setTile(int x, int y, Tile tile) {
@@ -104,6 +111,14 @@ public class Playfield implements Serializable {
         render();
     }
 
+    public void increaseStepsCount() {
+        stepsCount++;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
     public Tile getTile(int x, int y) {
         return field[x][y];
     }
@@ -118,6 +133,14 @@ public class Playfield implements Serializable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getStepsCount() {
+        return stepsCount;
+    }
+
+    public String getLevelName() {
+        return levelName;
     }
 
     public LevelState getLevelState() {

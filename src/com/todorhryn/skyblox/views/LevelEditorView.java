@@ -1,16 +1,13 @@
 package com.todorhryn.skyblox.views;
 
 import com.todorhryn.skyblox.controllers.LevelEditorController;
+import com.todorhryn.skyblox.controllers.SceneController;
 import com.todorhryn.skyblox.game.LevelEditor;
 import com.todorhryn.skyblox.game.LevelEditorState;
 import com.todorhryn.skyblox.game.LevelLoader;
 import com.todorhryn.skyblox.game.tiles.SplittingTile;
 import com.todorhryn.skyblox.game.tiles.Tile;
 import com.todorhryn.skyblox.game.tiles.TileController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -19,21 +16,14 @@ public class LevelEditorView extends PlayfieldView {
     public static final Color controlledTileOverlayColor = Color.web("00A6FF50");
     public static final Color blockAfterSplitColor = Color.web("3C26FF");
 
-    public LevelEditorView(Scene scene, String levelName) throws IOException {
+    public LevelEditorView(SceneController sceneController, String levelName) throws IOException {
+        super(sceneController, "/scenes/LevelEditorScene.fxml");
         LevelEditor levelEditor = new LevelEditor(this, LevelLoader.getInstance().load(this, levelName));
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/LevelEditorScene.fxml"));
-        LevelEditorController controller = new LevelEditorController(levelEditor, levelName);
-        fxmlLoader.setController(controller);
-
-        Parent root = fxmlLoader.load();
-        scene.setRoot(root);
-
-        setScene(scene);
-        setCtx(((Canvas) scene.lookup("#canvas")).getGraphicsContext2D());
         setPlayfield(levelEditor);
 
-        render();
+        LevelEditorController controller = (LevelEditorController) getController();
+        controller.setLevelEditor(levelEditor);
+        controller.setLevelName(levelName);
     }
 
     @Override
@@ -61,7 +51,7 @@ public class LevelEditorView extends PlayfieldView {
 
     @Override
     public void render() {
-        if (getCtx() == null)
+        if (getCtx() == null || getPlayfield() == null)
             return;
 
         super.render();

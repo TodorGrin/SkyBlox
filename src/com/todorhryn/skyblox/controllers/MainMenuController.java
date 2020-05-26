@@ -1,22 +1,20 @@
 package com.todorhryn.skyblox.controllers;
 
-import com.todorhryn.skyblox.views.MainView;
 import javafx.fxml.FXML;
 
-public class MainMenuController {
-    private MainView mainView;
-
+public class MainMenuController extends Controller {
     @FXML
-    public void onPlayClicked() {
-        mainView.showLevel();
+    public void playButton_onClicked() {
+        getSceneController().showLevelsList(false);
     }
 
     @FXML
-    public void onLevelEditorClicked() {
-        mainView.showLevelEditor();
+    public void openLevelEditorButton_onClicked() {
+        getSceneController().showLevelsList(true);
     }
 
-    public void setMainView(MainView mainView) {
-        this.mainView = mainView;
+    @FXML
+    public void selectAccountButton_onClicked() {
+        getSceneController().showLoginView();
     }
 }

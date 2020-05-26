@@ -50,7 +50,15 @@
             <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
          </right>
       </BorderPane>
    </children>

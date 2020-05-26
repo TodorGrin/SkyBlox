@@ -17,7 +17,7 @@ public class LevelLoader {
     }
 
     private String getLevelPath(String levelName) {
-        return "levels/" + levelName + ".skyblox";
+        return "data/levels/" + levelName + ".skyblox";
     }
 
     public static LevelLoader getInstance() {
@@ -41,6 +41,8 @@ public class LevelLoader {
             Alert.showError("Error while loading level", ex.getLocalizedMessage());
             playfield = new Playfield(playfieldView,14, 14);
         }
+
+        playfield.setLevelName(levelName);
 
         return playfield;
     }

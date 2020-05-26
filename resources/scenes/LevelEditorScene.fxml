@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todorhryn.skyblox.controllers.LevelEditorController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -112,6 +112,14 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
                   <Canvas id="canvas" focusTraversable="true" height="300.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" width="300.0" />
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" StackPane.alignment="TOP_RIGHT">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
                </children>
             </StackPane>
          </children>
