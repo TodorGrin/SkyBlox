@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Comparator;
 
 public class HighscoresDialogView {
     private String levelName;
@@ -45,10 +46,10 @@ public class HighscoresDialogView {
         highscoreColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getHighscore(levelName))));
         highscoreColumn.prefWidthProperty().bind(highscoresTableView.widthProperty().divide(2));
 
-        highscoresTableView.getSortOrder().add(highscoreColumn);
-
         highscoresTableView.getColumns().add(usernameColumn);
         highscoresTableView.getColumns().add(highscoreColumn);
+
+        AccountManager.getInstance().getAccounts().sort(Comparator.comparingInt(a -> a.getHighscore(levelName)));
 
         for (Account account : AccountManager.getInstance().getAccounts())
             if (account.getHighscore(levelName) >= 0)
