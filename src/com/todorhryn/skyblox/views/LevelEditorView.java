@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.views;
 
 import com.todorhryn.skyblox.controllers.LevelEditorController;
-import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.SceneController;
 import com.todorhryn.skyblox.game.LevelEditor;
 import com.todorhryn.skyblox.game.LevelEditorState;
 import com.todorhryn.skyblox.game.LevelLoader;

@@ -59,7 +59,13 @@ public class Playfield implements Serializable {
         this.levelState = levelState;
 
         if (levelState == LevelState.PASSED) {
-            AccountManager.getInstance().getCurrentAccount().addHighscore(levelName, stepsCount);
+            Account currentAccount = AccountManager.getInstance().getCurrentAccount();
+            currentAccount.addHighscore(levelName, stepsCount);
+            currentAccount.setLastPlayfield(null);
+            AccountManager.getInstance().save();
+        }
+        else if (levelState == LevelState.FAILED) {
+            AccountManager.getInstance().getCurrentAccount().setLastPlayfield(null);
             AccountManager.getInstance().save();
         }
     }

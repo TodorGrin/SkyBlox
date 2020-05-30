@@ -15,7 +15,7 @@ public class HighscoresDialogController {
     private HighscoresDialogView highscoresDialogView;
 
     @FXML
-    public void okButton_onClicked(MouseEvent e) {
+    public void okButtonClicked(MouseEvent e) {
         Node source = (Node) e.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();

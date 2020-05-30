@@ -1,5 +1,5 @@
 package com.todorhryn.skyblox.views;
-import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.SceneController;
 import com.todorhryn.skyblox.game.Account;
 import com.todorhryn.skyblox.game.AccountManager;
 import javafx.scene.control.Button;
@@ -21,5 +21,6 @@ public class MainMenuView extends View {
     public void update() {
         Account account = AccountManager.getInstance().getCurrentAccount();
         ((Button) getRoot().lookup("#selectAccountButton")).setText("Аккаунт: " + (account != null ? account.getUsername() : "нет"));
+        getRoot().lookup("#continueButton").setVisible(account != null && account.getLastPlayfield() != null);
     }
 }

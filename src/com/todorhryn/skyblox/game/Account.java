@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Account implements Serializable {
     private String username;
     private HashMap<String, Integer> highscores = new HashMap<>();
+    private Playfield lastPlayfield;
 
     public Account(String username) {
         this.username = username;
@@ -25,5 +26,13 @@ public class Account implements Serializable {
         Integer score = highscores.get(levelName);
 
         return Objects.requireNonNullElse(score, -1);
+    }
+
+    public void setLastPlayfield(Playfield lastPlayfield) {
+        this.lastPlayfield = lastPlayfield;
+    }
+
+    public Playfield getLastPlayfield() {
+        return lastPlayfield;
     }
 }

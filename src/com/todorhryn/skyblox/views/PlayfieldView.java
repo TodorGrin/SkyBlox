@@ -1,6 +1,6 @@
 package com.todorhryn.skyblox.views;
 
-import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.SceneController;
 import com.todorhryn.skyblox.game.Playfield;
 import com.todorhryn.skyblox.game.tiles.*;
 import javafx.scene.canvas.Canvas;
@@ -34,15 +34,9 @@ public class PlayfieldView extends View {
         if (images.containsKey(tileClass))
             return images.get(tileClass);
         else {
-            try {
-                Image image = new Image("images/" + tileClass.getSimpleName() + ".png");
-                images.put(tileClass, image);
-                return image;
-            }
-            catch (Exception e) {
-                Alert.showError("Error while loading " + tileClass.getSimpleName() + " image", e.getLocalizedMessage());
-                return null;
-            }
+            Image image = new Image("images/" + tileClass.getSimpleName() + ".png");
+            images.put(tileClass, image);
+            return image;
         }
     }
 

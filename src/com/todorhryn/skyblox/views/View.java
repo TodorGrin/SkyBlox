@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.views;
 
 import com.todorhryn.skyblox.controllers.Controller;
-import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.SceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 

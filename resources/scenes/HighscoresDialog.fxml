@@ -19,7 +19,7 @@
             <TableView fx:id="highscoresTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <AnchorPane prefHeight="42.0" prefWidth="590.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#okButton_onClicked" text="Ok" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button mnemonicParsing="false" onMouseClicked="#okButtonClicked" prefHeight="42.0" prefWidth="590.0" text="Ok" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="16.0" />
                      </font>

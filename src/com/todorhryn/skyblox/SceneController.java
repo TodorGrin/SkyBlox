@@ -1,17 +1,17 @@
-package com.todorhryn.skyblox.controllers;
+package com.todorhryn.skyblox;
 
 import com.todorhryn.skyblox.views.*;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class SceneController extends Application {
+import java.io.IOException;
+
+public class SceneController {
     private Scene scene;
     private MainMenuView mainMenuView;
     private LevelsListView levelsListView;
 
-    @Override
-    public void start(Stage primaryStage) {
+    public SceneController(Stage primaryStage) {
         try {
             mainMenuView = new MainMenuView(this);
             primaryStage.setTitle("SkyBlox");
@@ -22,13 +22,9 @@ public class SceneController extends Application {
 
             primaryStage.show();
         }
-        catch (Exception e) {
+        catch (IOException e) {
             Alert.showError("Error while creating GUI", e.getLocalizedMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     public void showMainMenu() {
@@ -36,12 +32,7 @@ public class SceneController extends Application {
     }
 
     public void showLevelsList(boolean openLevelEditor) {
-        try {
-            levelsListView.show(openLevelEditor);
-        }
-        catch (Exception e) {
-            Alert.showError("Error while creating GUI", e.getLocalizedMessage());
-        }
+        levelsListView.show(openLevelEditor);
     }
 
     public void showLevelEditor(String levelName) {
@@ -49,7 +40,7 @@ public class SceneController extends Application {
             LevelEditorView view = new LevelEditorView(this, levelName);
             view.show();
         }
-        catch (Exception e) {
+        catch (IOException e) {
             Alert.showError("Error while creating GUI", e.getLocalizedMessage());
         }
     }
@@ -59,7 +50,7 @@ public class SceneController extends Application {
             GameView view = new GameView(this, levelName);
             view.show();
         }
-        catch (Exception e) {
+        catch (IOException e) {
             Alert.showError("Error while creating GUI", e.getLocalizedMessage());
         }
     }
@@ -69,7 +60,7 @@ public class SceneController extends Application {
             LoginView loginView = new LoginView(this);
             loginView.show();
         }
-        catch (Exception e) {
+        catch (IOException e) {
             Alert.showError("Error while creating GUI", e.getLocalizedMessage());
         }
     }

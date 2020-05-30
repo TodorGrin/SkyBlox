@@ -1,5 +1,7 @@
 package com.todorhryn.skyblox.controllers;
 
+import com.todorhryn.skyblox.SceneController;
+
 public abstract class Controller {
     private SceneController sceneController;
 

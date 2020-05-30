@@ -8,7 +8,7 @@ public class LevelsListController extends Controller {
     private boolean openLevelEditor = false;
 
     @FXML
-    public void levelButton_onClicked(MouseEvent ev) {
+    public void levelButtonClicked(MouseEvent ev) {
         Button button = (Button) ev.getSource();
         String levelName = button.getText();
 
@@ -19,7 +19,7 @@ public class LevelsListController extends Controller {
     }
 
     @FXML
-    public void backButton_onClicked() {
+    public void backButtonClicked() {
         getSceneController().showMainMenu();
     }
 

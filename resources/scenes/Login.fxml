@@ -16,12 +16,12 @@
    <children>
       <BorderPane layoutX="182.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <left>
-            <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Region prefHeight="200.0" prefWidth="175.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="390.0" prefWidth="175.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -32,9 +32,9 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab text="Войти">
+                        <Tab fx:id="accountTab" text="Аккаунт">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -45,8 +45,12 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="loginTextField" />
-                                          <Button mnemonicParsing="false" onMouseClicked="#loginButton_onClicked" text="Войти">
+                                          <Label fx:id="loginLabel" text="Нет">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Button mnemonicParsing="false" onMouseClicked="#exitAccountButtonClicked" text="Выйти">
                                              <VBox.margin>
                                                 <Insets top="5.0" />
                                              </VBox.margin>
@@ -57,7 +61,30 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Регистрация">
+                        <Tab fx:id="loginTab" text="Войти">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" layoutX="-23.0" prefHeight="360.0" prefWidth="213.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label alignment="CENTER" text="Логин:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="loginTextField" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#loginButtonClicked" text="Войти">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="signupTab" text="Регистрация">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -69,7 +96,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="loginTextField2" />
-                                          <Button mnemonicParsing="false" onMouseClicked="#createAccountButton_onClicked" text="Зарегистрироваться">
+                                          <Button mnemonicParsing="false" onMouseClicked="#createAccountButtonClicked" text="Зарегистрироваться">
                                              <VBox.margin>
                                                 <Insets top="5.0" />
                                              </VBox.margin>

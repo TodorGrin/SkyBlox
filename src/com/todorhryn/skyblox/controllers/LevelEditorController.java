@@ -10,6 +10,9 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 public class LevelEditorController extends Controller {
     private LevelEditor levelEditor;
     private String levelName;
@@ -179,7 +182,7 @@ public class LevelEditorController extends Controller {
             else if (levelEditor.getState() == LevelEditorState.SELECT_MAIN_BLOCK_POSITION || levelEditor.getState() == LevelEditorState.SELECT_SECOND_BLOCK_POSITION)
                 levelEditor.setState(LevelEditorState.SELECT_TILE);
         }
-        catch (Exception e) {
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             Alert.showError("Error", e.getLocalizedMessage());
         }
     }
@@ -200,7 +203,7 @@ public class LevelEditorController extends Controller {
     }
 
     @FXML
-    public void backButton_onClicked() {
+    public void backButtonClicked() {
         getSceneController().showLevelsList(true);
     }
 

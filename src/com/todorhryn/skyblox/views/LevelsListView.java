@@ -1,7 +1,7 @@
 package com.todorhryn.skyblox.views;
 
 import com.todorhryn.skyblox.controllers.LevelsListController;
-import com.todorhryn.skyblox.controllers.SceneController;
+import com.todorhryn.skyblox.SceneController;
 
 import java.io.IOException;
 

@@ -13,32 +13,32 @@
          <center>
             <TilePane alignment="CENTER" hgap="5.0" prefHeight="390.0" prefWidth="435.0" vgap="5.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="1">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="1">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="2">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="2">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="3">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="3">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="4">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="4">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="5">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="5">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#levelButton_onClicked" prefHeight="54.0" prefWidth="54.0" text="6">
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="6">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -52,7 +52,7 @@
          <right>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="25.0" />
                      </font>

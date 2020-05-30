@@ -11,6 +11,8 @@ public class AccountManager {
     private static transient AccountManager accountManager;
     private static final String accountsFile = "data/accounts.dat";
 
+    private static final String guestUsername = "Гость";
+
     private AccountManager() {
         load();
     }
@@ -55,10 +57,13 @@ public class AccountManager {
             accounts = (ArrayList<Account>) in.readObject();
             currentAccount = (Account) in.readObject();
         }
-        catch (Exception ex) {
+        catch (ClassNotFoundException | IOException ex) {
             accounts = new ArrayList<>();
             currentAccount = null;
         }
+
+        if (currentAccount == null)
+            loginAsGuest();
     }
 
     public void save() {
@@ -75,6 +80,15 @@ public class AccountManager {
         catch (IOException e) {
             Alert.showError("Error while saving accounts", e.getLocalizedMessage());
         }
+    }
+
+    public void loginAsGuest() {
+        createAccount(guestUsername);
+        login(guestUsername);
+    }
+
+    public boolean loggedInAsGuest() {
+        return currentAccount.getUsername().equals(guestUsername);
     }
 
     public Account getCurrentAccount() {

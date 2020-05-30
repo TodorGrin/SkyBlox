@@ -22,12 +22,12 @@
                   </Label>
                   <HBox alignment="TOP_RIGHT" layoutX="61.0" layoutY="-18.0" prefHeight="58.0" prefWidth="125.0" spacing="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <children>
-                        <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#highscoresButton_onClicked" prefHeight="54.0" prefWidth="66.0" text="🥇">
+                        <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#highscoresButtonClicked" prefHeight="54.0" prefWidth="66.0" text="🥇">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄">
+                        <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="54.0" prefWidth="66.0" text="☰">
                            <font>
                               <Font size="25.0" />
                            </font>

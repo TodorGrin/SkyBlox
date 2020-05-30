@@ -112,7 +112,7 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
                   <Canvas id="canvas" focusTraversable="true" height="300.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" width="300.0" />
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#backButton_onClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" StackPane.alignment="TOP_RIGHT">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="54.0" prefWidth="58.0" text="🡄" StackPane.alignment="TOP_RIGHT">
                      <font>
                         <Font size="25.0" />
                      </font>

@@ -58,6 +58,7 @@ public class Player implements Serializable {
 
         playfield.increaseStepsCount();
         playfield.render();
+        AccountManager.getInstance().save();
     }
 
     public void moveRight() {

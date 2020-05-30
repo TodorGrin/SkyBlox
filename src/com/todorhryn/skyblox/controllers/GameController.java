@@ -6,6 +6,8 @@ import com.todorhryn.skyblox.views.HighscoresDialogView;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 
+import java.io.IOException;
+
 public class GameController extends Controller {
     private Playfield playfield;
 
@@ -31,16 +33,16 @@ public class GameController extends Controller {
     }
 
     @FXML
-    public void backButton_onClicked() {
+    public void backButtonClicked() {
         getSceneController().showLevelsList(false);
     }
 
     @FXML
-    public void highscoresButton_onClicked() {
+    public void highscoresButtonClicked() {
         try {
             HighscoresDialogView highscoresDialogView = new HighscoresDialogView(playfield.getLevelName());
         }
-        catch (Exception e) {
+        catch (IOException e) {
             Alert.showError("Error while loading highscores GUI", e.getMessage());
         }
     }
