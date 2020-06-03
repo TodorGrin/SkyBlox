@@ -43,6 +43,16 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="7">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#levelButtonClicked" prefHeight="54.0" prefWidth="54.0" text="8">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
                </children>
             </TilePane>
          </center>

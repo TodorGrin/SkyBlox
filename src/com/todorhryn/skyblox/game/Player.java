@@ -121,6 +121,8 @@ public class Player implements Serializable {
         tmp = mainBlockY;
         mainBlockY = secondBlockY;
         secondBlockY = tmp;
+
+        playfield.render();
     }
 
     public void setPosition(int mainBlockX, int mainBlockY, int secondBlockX, int secondBlockY) {

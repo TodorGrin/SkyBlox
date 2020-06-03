@@ -12,6 +12,7 @@ public class AccountManager {
     private static final String accountsFile = "data/accounts.dat";
 
     private static final String guestUsername = "Гость";
+    private static final String guestPassword = "@Gdv7P#67$";
 
     private AccountManager() {
         load();
@@ -24,9 +25,9 @@ public class AccountManager {
         return accountManager;
     }
 
-    public boolean login(String login) {
+    public boolean login(String login, String password) {
         for (Account account: accounts) {
-            if (account.getUsername().equals(login)) {
+            if (account.getUsername().equals(login) && account.getPassword().check(password)) {
                 currentAccount = account;
                 save();
                 return true;
@@ -36,13 +37,13 @@ public class AccountManager {
         return false;
     }
 
-    public boolean createAccount(String login) {
+    public boolean createAccount(String login, String password) {
         for (Account account : accounts) {
             if (account.getUsername().equals(login))
                 return false;
         }
 
-        Account account = new Account(login);
+        Account account = new Account(login, new Password(password));
         accounts.add(account);
         save();
 
@@ -83,8 +84,8 @@ public class AccountManager {
     }
 
     public void loginAsGuest() {
-        createAccount(guestUsername);
-        login(guestUsername);
+        createAccount(guestUsername, guestPassword);
+        login(guestUsername, guestPassword);
     }
 
     public boolean loggedInAsGuest() {

@@ -6,11 +6,13 @@ import java.util.Objects;
 
 public class Account implements Serializable {
     private String username;
+    private Password password;
     private HashMap<String, Integer> highscores = new HashMap<>();
     private Playfield lastPlayfield;
 
-    public Account(String username) {
+    public Account(String username, Password password) {
         this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -34,5 +36,9 @@ public class Account implements Serializable {
 
     public Playfield getLastPlayfield() {
         return lastPlayfield;
+    }
+
+    public Password getPassword() {
+        return password;
     }
 }

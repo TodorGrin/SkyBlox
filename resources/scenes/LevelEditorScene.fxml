@@ -117,7 +117,7 @@
                         <Font size="25.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets right="5.0" top="5.0" />
+                        <Insets />
                      </StackPane.margin>
                   </Button>
                </children>

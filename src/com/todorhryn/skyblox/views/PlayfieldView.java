@@ -73,7 +73,7 @@ public class PlayfieldView extends View {
             ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 3, playfield.getPlayer().getSecondBlockY() * 32 + 3, 58, 26);
         else {
             ctx.fillRect(playfield.getPlayer().getMainBlockX() * 32 + 3, playfield.getPlayer().getMainBlockY() * 32 + 3, 26, 26);
-            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 3, playfield.getPlayer().getSecondBlockY() * 32 + 3, 26, 26);
+            ctx.fillRect(playfield.getPlayer().getSecondBlockX() * 32 + 5, playfield.getPlayer().getSecondBlockY() * 32 + 5, 22, 22);
         }
     }
 
